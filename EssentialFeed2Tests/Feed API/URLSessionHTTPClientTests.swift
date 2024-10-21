@@ -8,7 +8,7 @@
 import XCTest
 import EssentialFeed2
 
-class URLSessionHTTPClient {
+class URLSessionHTTPClient: HTTPClient {
     private let session: URLSession
 
     init(session: URLSession = .shared) {
@@ -106,7 +106,7 @@ class URLSessionHTTPClientTests: XCTestCase {
 // MARK: - Helpers
 
 extension URLSessionHTTPClientTests {
-    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> URLSessionHTTPClient {
+    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> HTTPClient {
         return URLSessionHTTPClient()
     }
 
