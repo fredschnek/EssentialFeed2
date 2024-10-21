@@ -79,7 +79,7 @@ class URLSessionHTTPClientTests: XCTestCase {
 // MARK: - Helpers
 
 extension URLSessionHTTPClientTests {
-    private func makeSUT() -> URLSessionHTTPClient {
+    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> URLSessionHTTPClient {
         return URLSessionHTTPClient()
     }
 
