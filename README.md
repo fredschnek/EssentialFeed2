@@ -1,6 +1,6 @@
 # Essential Feed App – Image Feed Feature
 
-[![Build Status](https://app.travis-ci.com/fredschnek/EssentialFeed.svg?token=65dT1nFFzWnXvrAqvRsp&branch=main)](https://app.travis-ci.com/fredschnek/EssentialFeed)
+[![Build Status](https://github.com/fredschnek/EssentialFeed2/actions/workflows/CI-macOS.yml/badge.svg)](https://github.com/fredschnek/EssentialFeed2/actions/workflows/CI-macOS.yml)
 
 ## BDD Specs
 
