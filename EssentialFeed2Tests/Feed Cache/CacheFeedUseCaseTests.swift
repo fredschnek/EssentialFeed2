@@ -28,44 +28,11 @@ class LocalFeedLoader {
   }
 }
 
-class FeedStore {
+protocol FeedStore {
   typealias DeletionCompletion = (Error?) -> Void
   typealias InsertionCompletion = (Error?) -> Void
-
-  enum ReceivedMessages: Equatable {
-    case deletedCacheFeed
-    case insert([FeedItem], Date)
-  }
-
-  private(set) var receivedMessages = [ReceivedMessages]()
-  private var deletionCompletions = [DeletionCompletion]()
-  private var insertionCompletions = [InsertionCompletion]()
-
-  func deleteCacheFeed(completion: @escaping DeletionCompletion) {
-    deletionCompletions.append(completion)
-    receivedMessages.append(.deletedCacheFeed)
-  }
-
-  func completeDeletion(with error: Error, at index: Int = 0) {
-    deletionCompletions[index](error)
-  }
-
-  func completeDeletionSuccessfully(at index: Int = 0) {
-    deletionCompletions[index](nil)
-  }
-
-  func insert(_ items: [FeedItem], timestamp: Date, completion: @escaping InsertionCompletion) {
-    insertionCompletions.append(completion)
-    receivedMessages.append(.insert(items, timestamp))
-  }
-
-  func completeInsertion(with error: Error, at index: Int = 0) {
-    insertionCompletions[index](error)
-  }
-
-  func completeInsertionSuccessfully(at index: Int = 0) {
-    insertionCompletions[index](nil)
-  }
+  func deleteCacheFeed(completion: @escaping DeletionCompletion)
+  func insert(_ items: [FeedItem], timestamp: Date, completion: @escaping InsertionCompletion)
 }
 
 final class CacheFeedUseCaseTests: XCTestCase {
@@ -141,8 +108,8 @@ extension CacheFeedUseCaseTests {
   private func makeSUT(currentDate: @escaping () -> Date = Date.init,
                        file: StaticString = #filePath,
                        line: UInt = #line
-  ) -> (sut: LocalFeedLoader, store: FeedStore) {
-    let store = FeedStore()
+  ) -> (sut: LocalFeedLoader, store: FeedStoreSpy) {
+    let store = FeedStoreSpy()
     let sut = LocalFeedLoader(store: store, currentDate: currentDate)
 
     trackForMemoryLeaks(store, file: file, line: line)
@@ -180,5 +147,45 @@ extension CacheFeedUseCaseTests {
 
   private func anyNSError() -> NSError {
     NSError(domain: "any error", code: 0)
+  }
+
+  private class FeedStoreSpy: FeedStore {
+    typealias DeletionCompletion = (Error?) -> Void
+    typealias InsertionCompletion = (Error?) -> Void
+
+    enum ReceivedMessages: Equatable {
+      case deletedCacheFeed
+      case insert([FeedItem], Date)
+    }
+
+    private(set) var receivedMessages = [ReceivedMessages]()
+    private var deletionCompletions = [DeletionCompletion]()
+    private var insertionCompletions = [InsertionCompletion]()
+
+    func deleteCacheFeed(completion: @escaping DeletionCompletion) {
+      deletionCompletions.append(completion)
+      receivedMessages.append(.deletedCacheFeed)
+    }
+
+    func completeDeletion(with error: Error, at index: Int = 0) {
+      deletionCompletions[index](error)
+    }
+
+    func completeDeletionSuccessfully(at index: Int = 0) {
+      deletionCompletions[index](nil)
+    }
+
+    func insert(_ items: [FeedItem], timestamp: Date, completion: @escaping InsertionCompletion) {
+      insertionCompletions.append(completion)
+      receivedMessages.append(.insert(items, timestamp))
+    }
+
+    func completeInsertion(with error: Error, at index: Int = 0) {
+      insertionCompletions[index](error)
+    }
+
+    func completeInsertionSuccessfully(at index: Int = 0) {
+      insertionCompletions[index](nil)
+    }
   }
 }
