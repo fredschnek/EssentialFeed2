@@ -134,12 +134,12 @@ extension LoadFeedFromRemoteUseCaseTests {
         imageURL: URL,
         description: String? = nil,
         location: String? = nil
-    ) -> (model: FeedItem, json: [String: Any]) {
-        let item = FeedItem(
+    ) -> (model: FeedImage, json: [String: Any]) {
+        let item = FeedImage(
             id: id,
             description: description,
             location: location,
-            imageURL: imageURL
+            url: imageURL
         )
 
         let json = [
