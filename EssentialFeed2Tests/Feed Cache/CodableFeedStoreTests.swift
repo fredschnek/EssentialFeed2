@@ -91,6 +91,17 @@ extension CodableFeedStoreTests {
     expect(sut, toRetrieve: .empty)
   }
 
+  func test_retrieve_hasNoSideEffectsOnNonEmptyCache() {
+    let sut = makeSUT()
+    let feed = uniqueImageFeed().local
+    let timestamp = Date()
+
+    insert((feed, timestamp), to: sut)
+
+    expect(sut, toRetrieve: .found(feed: feed, timestamp: timestamp))
+    expect(sut, toRetrieve: .found(feed: feed, timestamp: timestamp))
+  }
+
   func test_retrieve_devliversFoundValuesOnNonEmptyCache() {
     let sut = makeSUT()
     let feed = uniqueImageFeed().local
@@ -110,15 +121,14 @@ extension CodableFeedStoreTests {
     expect(sut, toRetrieve: .failure(anyNSError()))
   }
 
-  func test_retrieve_hasNoSideEffectsOnNonEmptyCache() {
+  func test_retrieve_hasNoSideEffectsOnFailure() {
+    let storeURL = testSpecificStoreURL()
     let sut = makeSUT()
-    let feed = uniqueImageFeed().local
-    let timestamp = Date()
 
-    insert((feed, timestamp), to: sut)
+    try! "invalid data".write(to: storeURL, atomically: false, encoding: .utf8)
 
-    expect(sut, toRetrieve: .found(feed: feed, timestamp: timestamp))
-    expect(sut, toRetrieve: .found(feed: feed, timestamp: timestamp))
+    expect(sut, toRetrieve: .failure(anyNSError()))
+    expect(sut, toRetrieve: .failure(anyNSError()))
   }
 }
 
