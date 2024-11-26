@@ -40,6 +40,7 @@
 		7F45A2502CC6D96F006DB06A /* Exceptions for "EssentialFeed2Tests" folder in "EssentialFeedAPIEndToEndTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Helpers/SharedtestHelpers.swift,
 				"Helpers/XCTestCase+MemoryLeakTracking.swift",
 			);
 			target = 7F45A2442CC6D500006DB06A /* EssentialFeedAPIEndToEndTests */;
