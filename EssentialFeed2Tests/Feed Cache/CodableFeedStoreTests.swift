@@ -102,9 +102,10 @@ extension CodableFeedStoreTests {
   }
 
   func test_retrieve_deliversFailureOnRetrievalError() {
+    let storeURL = testSpecificStoreURL()
     let sut = makeSUT()
 
-    try! "invalid data".write(to: testSpecificStoreURL(), atomically: false, encoding: .utf8)
+    try! "invalid data".write(to: storeURL, atomically: false, encoding: .utf8)
 
     expect(sut, toRetrieve: .failure(anyNSError()))
   }
@@ -122,10 +123,11 @@ extension CodableFeedStoreTests {
 }
 
 extension CodableFeedStoreTests {
-  func makeSUT(file: StaticString = #filePath,
+  func makeSUT(storeURL: URL? = nil,
+               file: StaticString = #filePath,
                line: UInt = #line
   ) -> CodableFeedStore {
-    let sut = CodableFeedStore(storeURL: testSpecificStoreURL())
+    let sut = CodableFeedStore(storeURL: storeURL ?? testSpecificStoreURL())
     trackForMemoryLeaks(sut, file: file, line: line)
     return sut
   }
