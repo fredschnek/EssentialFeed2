@@ -47,7 +47,8 @@ extension CoreDataFeedStoreTests {
 
   func test_insert_overridesPreviouslyInsertedCacheValues() {
     let sut = makeSUT()
-    assertThatInsertOverridesPreviouslyInsertedCacheValues(on: sut)  }
+    assertThatInsertOverridesPreviouslyInsertedCacheValues(on: sut)
+  }
 }
 
 // MARK: - Deletion tests
@@ -74,9 +75,12 @@ extension CoreDataFeedStoreTests {
   }
 }
 
+// MARK: - Store side-effects
+
 extension CoreDataFeedStoreTests {
   func test_storeSideEffects_runSerially() {
-
+    let sut = makeSUT()
+    assertThatSideEffectsRunSerially(on: sut)
   }
 }
 
