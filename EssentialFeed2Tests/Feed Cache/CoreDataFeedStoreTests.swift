@@ -46,8 +46,8 @@ extension CoreDataFeedStoreTests {
   }
 
   func test_insert_overridesPreviouslyInsertedCacheValues() {
-
-  }
+    let sut = makeSUT()
+    assertThatInsertOverridesPreviouslyInsertedCacheValues(on: sut)  }
 }
 
 extension CoreDataFeedStoreTests {
