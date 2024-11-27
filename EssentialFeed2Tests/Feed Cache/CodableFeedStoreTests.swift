@@ -125,7 +125,7 @@ extension CodableFeedStoreTests {
   }
 }
 
-// MARK: - Concurrent tests
+// MARK: - Thread-Safe Behavior tests
 
 extension CodableFeedStoreTests {
 
