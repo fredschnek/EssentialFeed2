@@ -8,6 +8,8 @@
 import XCTest
 import EssentialFeed2
 
+// MARK: - Retrieval tests
+
 class CoreDataFeedStoreTests: XCTestCase, FeedStoreSpecs {
   func test_retrieve_deliversEmptyOnEmptyCache() {
     let sut = makeSUT()
@@ -18,29 +20,37 @@ class CoreDataFeedStoreTests: XCTestCase, FeedStoreSpecs {
     let sut = makeSUT()
     assertThatRetrieveHasNoSideEffectsOnEmptyCache(on: sut)
   }
-  
+
   func test_retrieve_deliversFoundValuesOnNonEmptyCache() {
     let sut = makeSUT()
     assertThatRetrieveDeliversFoundValuesOnNonEmptyCache(on: sut)
   }
-  
+
   func test_retrieve_hasNoSideEffectsOnNonEmptyCache() {
     let sut = makeSUT()
     assertThatRetrieveHasNoSideEffectsOnNonEmptyCache(on: sut)
   }
-  
+}
+
+// MARK: - Insertion tests
+
+extension CoreDataFeedStoreTests {
   func test_insert_deliversNoErrorOnEmptyCache() {
-
+    let sut = makeSUT()
+    assertThatInsertDeliversNoErrorOnEmptyCache(on: sut)
   }
-  
+
   func test_insert_deliversNoErrorOnNonEmptyCache() {
-
+    let sut = makeSUT()
+    assertThatInsertDeliversNoErrorOnEmptyCache(on: sut)
   }
-  
+
   func test_insert_overridesPreviouslyInsertedCacheValues() {
 
   }
-  
+}
+
+extension CoreDataFeedStoreTests {
   func test_delete_deliversNoErrorOnEmptyCache() {
 
   }
