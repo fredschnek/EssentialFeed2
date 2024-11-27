@@ -44,13 +44,6 @@
 			);
 			target = 7F45A2442CC6D500006DB06A /* EssentialFeedAPIEndToEndTests */;
 		};
-		7F7875E92CBDA00B00C2F448 /* Exceptions for "EssentialFeed2" folder in "EssentialFeed2" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			publicHeaders = (
-				EssentialFeed2.h,
-			);
-			target = 7F7875D62CBDA00B00C2F448 /* EssentialFeed2 */;
-		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -61,9 +54,6 @@
 		};
 		7F7875D92CBDA00B00C2F448 /* EssentialFeed2 */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				7F7875E92CBDA00B00C2F448 /* Exceptions for "EssentialFeed2" folder in "EssentialFeed2" target */,
-			);
 			path = EssentialFeed2;
 			sourceTree = "<group>";
 		};
