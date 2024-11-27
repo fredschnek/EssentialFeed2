@@ -50,9 +50,12 @@ extension CoreDataFeedStoreTests {
     assertThatInsertOverridesPreviouslyInsertedCacheValues(on: sut)  }
 }
 
+// MARK: - Deletion tests
+
 extension CoreDataFeedStoreTests {
   func test_delete_deliversNoErrorOnEmptyCache() {
-
+    let sut = makeSUT()
+    assertThatDeleteDeliversNoErrorOnEmptyCache(on: sut)
   }
   
   func test_delete_hasNoSideEffectsOnEmptyCache() {
