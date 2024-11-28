@@ -159,7 +159,7 @@ extension CodableFeedStoreTests {
     }
 
     let op2 = expectation(description: "Operation 2")
-    sut.deleteCacheFeed { _ in
+    sut.deleteCachedFeed { _ in
       completedOperationsInOrder.append(op2)
       op2.fulfill()
     }

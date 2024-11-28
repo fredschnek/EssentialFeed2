@@ -20,7 +20,7 @@ final class ValidateFeedCacheUseCase: XCTestCase {
     sut.validateCache()
     store.completeRetrieval(with: anyNSError())
 
-    XCTAssertEqual(store.receivedMessages, [.retrieve, .deleteCacheFeed])
+    XCTAssertEqual(store.receivedMessages, [.retrieve, .deleteCachedFeed])
   }
 
   func test_validateCache_doeNotDeleteCacheOnEmptyCache() {
@@ -53,7 +53,7 @@ final class ValidateFeedCacheUseCase: XCTestCase {
     sut.validateCache()
     store.completeRetrieval(with: feed.local, timestamp: expirationTimestamp)
 
-    XCTAssertEqual(store.receivedMessages, [.retrieve, .deleteCacheFeed])
+    XCTAssertEqual(store.receivedMessages, [.retrieve, .deleteCachedFeed])
   }
 
   func test_validateCache_deletesExpiredCache() {
@@ -65,7 +65,7 @@ final class ValidateFeedCacheUseCase: XCTestCase {
     sut.validateCache()
     store.completeRetrieval(with: feed.local, timestamp: expiredTimestamp)
 
-    XCTAssertEqual(store.receivedMessages, [.retrieve, .deleteCacheFeed])
+    XCTAssertEqual(store.receivedMessages, [.retrieve, .deleteCachedFeed])
   }
 
   func test_validateCache_doesNotDeletesInvalidCachetAfterSUTInstanceHasBeenDeallocated() {
